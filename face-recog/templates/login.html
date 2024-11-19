@@ -1,19 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+<style>
+    h2 {
+        text-align: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column; /* Stack the input fields vertically */
+        align-items: center; /* Center the input fields horizontally */
+        width: 300px;
+        margin: auto; /* Center the form container itself */
+    }
+    input, button {
+        margin: 10px 0; /* Add margin for spacing */
+    }
+</style>
+<title>Login</title>
 </head>
 <body>
     <h2>Login</h2>
     <form method="post" id="loginForm">
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
+        <a href="dashboard.html"><button>Login</button></a>
     </form>
-    <script>
+    <!-- <script>
         window.onload = function() {
             document.getElementById('loginForm').reset();
         }
-    </script>
+    </script> -->
 </body>
 </html>

@@ -1,11 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
+<style>
+    h2 {
+        text-align: center;
+        margin-top: 50px; /* Add some margin to the top */
+    }
+    a {
+        display: flex;
+        justify-content: center; /* Center the buttons horizontally */
+        align-items: center;
+        margin-top: 20px; /* Add some margin to the top */
+        margin-block-end: 20px;
+    }
+</style>
     <title>Home</title>
 </head>
 <body>
     <h2>Welcome</h2>
-    <a href="{{ url_for('auth.register') }}"><button>Register</button></a>
-    <a href="{{ url_for('auth.login') }}"><button>Login</button></a>
+    <div class="container">
+        <a href="register.html"><button>Register</button></a>
+        <a href="login.html"><button>Login</button></a>
+    </div>
 </body>
 </html>

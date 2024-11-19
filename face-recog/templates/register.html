@@ -1,21 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
+<style>
+    h2 {
+        text-align: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        width: 300px;
+        margin: auto; 
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 10px 0;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        margin: 10px 0;
+        width: 100%; 
+    }
+    input[type="file"] {
+        margin: 10px 0;
+    }
+    button {
+        margin: 10px 0;
+        width: 100px; 
+    }
+</style>
+<title>Register</title>
 </head>
 <body>
     <h2>Register</h2>
-    <form method="post" id="registerForm" enctype="multipart/form-data">
+    <form method="post" id="registerForm" enctype="multipart/form-data" onsubmit="redirectToHome(event)">
         <input type="text" name="username" placeholder="Username" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
-        <input type="file" name="profile_picture" accept="image/*" required>
-        <button type="submit">Register</button>
+        <div class="form-group">
+            <input type="file" name="profile_picture" accept="image/*" required>
+        </div>
+        <a href="index.html"><button>Register</button></a>
     </form>
-    <script>
-        window.onload = function() {
-            document.getElementById('registerForm').reset();
-        }
-    </script>
 </body>
 </html>
