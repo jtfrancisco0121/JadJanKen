@@ -4,31 +4,56 @@
 <style>
     h2 {
         text-align: center;
-        margin-top: 50px; /* Add some margin to the top */
     }
-    .container {
+    form {
         display: flex;
         flex-direction: column;
-        align-items: center; /* Center children horizontally */
-        margin-top: 20px; /* Add some margin to the top */
+        align-items: center; 
+        width: 300px;
+        margin: auto; 
     }
-    img {
-        width: 150px;
-        height: 150px;
-        margin-bottom: 20px; /* Space between image and button */
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 10px 0;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        margin: 10px 0;
+        width: 100%; 
+    }
+    input[type="file"] {
+        margin: 10px 0;
     }
     button {
-        margin: 20px auto; /* Center the button and add margin */
-        display: block;
+        margin: 10px 0;
+        width: 100px; 
     }
 </style>
-    <title>Dashboard</title>
+<title>Register</title>
 </head>
 <body>
-    <h2>Welcome, Juicy Tender</h2>
-    <div class="container">
-        <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profile Picture">
-        <a href="{{ url_for('auth.logout') }}"><button>Logout</button></a>
-    </div>
+    <h2>Register</h2>
+    <form method="post" id="registerForm" enctype="multipart/form-data" onsubmit="redirectToHome(event)">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <div class="form-group">
+            <input type="file" name="profile_picture" accept="image/*" required>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    <script>
+        window.onload = function() {
+            document.getElementById('registerForm').reset();
+        }
+
+        function redirectToHome(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Add any form submission handling logic here
+            window.location.href = 'index.html'; // Redirect to index.html
+        }
+    </script>
 </body>
 </html>
+
