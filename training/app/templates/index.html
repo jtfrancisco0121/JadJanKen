@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+    h2 {
+        text-align: center;
+        margin-top: 50px; /* Add some margin to the top */
+        font-family: 'Bahnschrift', sans-serif;
+        font-size: 30pt;
+    }
+    .container {
+        display: flex;
+        justify-content: center; /* Center the buttons horizontally */
+        margin-top: 20px; /* Add some margin to the top */
+    }
+    a {
+        margin: 0 10px; /* Add margin between buttons */
+        margin-top: 20px;
+    } 
+    .whole_div {
+        text-align: center;
+        margin-top: 14%;
+    }
+    button{
+        font-family: Tw Cen MT;
+        width: 190px;
+        height: 60px;
+        font-size: 21pt;
+        margin-left: 40px;
+        font-weight: bold
+    }
+    .logo-cont p {
+        margin: 0;          /* Remove default margin */
+        padding: 0;         /* Remove default padding */
+        line-height: 1.5;     /* Adjust line height to reduce space between lines */
+        font-size: 30pt;
+        text-align: center;
+        font-weight: bold;
+        color:darkblue;
+    }
+</style>
+    <title>Home</title>
+</head>
+<body>
+    <div class="whole_div">
+        <div class="logo-cont">
+            <p>ATTENDANCE TRACKER</p>
+            <p>WITH FACIAL RECOGNITION</p>
+        </div>
+    
+        <div class ="container">
+        <a href="{{ url_for('auth.register') }}"><button>REGISTER</button></a>
+        <a href="{{ url_for('auth.login') }}"><button>LOGIN</button></a>
+        <a href="{{ url_for('auth.camera') }}"><button>CAMERA</button></a>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.7.1.min.js"></script>
+</html>
