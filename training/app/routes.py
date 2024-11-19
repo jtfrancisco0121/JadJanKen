@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 from app.models import users, save_users
 from app.simple_facerec import SimpleFacerec
 import time
+from datetime import datetime, timedelta
 from io import BytesIO
 from flask import Response
 
@@ -59,8 +60,10 @@ def register():
             'username': username,
             'email': email,
             'password': hashed_password,
-            'profile_picture': profile_picture_path
+            'profile_picture': profile_picture_path,
+            'logs': []  # New field for attendance logs
         }
+
         save_users(users)  # Save immediately after a new registration
         #users = load_users()  # Reload updated data if needed
         return redirect(url_for('auth.index'))
@@ -91,9 +94,11 @@ def logout():
 @bp.route('/dashboard', methods=['GET'])
 def dashboard():
     if 'user' in session:
-        return render_template('dashboard.html', username=session['user'], profile_picture=session['profile_picture'])
+        username = session['user']
+        user = next((u for u in users.values() if u['username'] == username), None)
+        if user:
+            return render_template('dashboard.html', username=username, profile_picture=user['profile_picture'], logs=user['logs'])
     return redirect(url_for('auth.index'))
-
 
 @bp.route('/camera', methods=['GET'])
 def camera():
@@ -124,6 +129,16 @@ def generate_frames():
             cv2.putText(frame, name, (x1, y1 - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 200), 2)
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 200), 4)
 
+           # Log attendance
+            for user in users.values():  # Loop through all users in the dictionary
+                if user['username'] == name:  # Check if the username matches the detected name
+                    current_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+                    user['logs'].append(current_time)  # Append the timestamp to the logs
+                    print(f"Attendance logged for {name}: {current_time}")
+                    break
+
+
+
         # Encode frame to JPEG
         ret, jpeg = cv2.imencode('.jpg', frame)
         if not ret:
@@ -136,7 +151,7 @@ def generate_frames():
 
     cap.release()
 
-
 @bp.route('/video_feed')
 def video_feed():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
