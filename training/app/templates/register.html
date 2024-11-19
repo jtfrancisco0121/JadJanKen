@@ -1,21 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Register</title>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Register</h2>
     <form method="post" id="registerForm" enctype="multipart/form-data">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="file" name="profile_picture" accept="image/*" required>
-        <button type="submit">Register</button>
+      <input type="text" name="username" placeholder="First Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="file" name="profile_picture" accept="image/*" required />
+      <button type="submit">Register</button>
     </form>
     <script>
-        window.onload = function() {
-            document.getElementById('registerForm').reset();
-        }
+      window.onload = function () {
+        document.getElementById("registerForm").reset();
+      };
     </script>
-</body>
+  </body>
 </html>
