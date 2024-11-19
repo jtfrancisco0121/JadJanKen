@@ -1,21 +1,19 @@
+# app/routes.py
 from flask import Blueprint, render_template, request, redirect, url_for, session, Response
-#import cv2
+import cv2
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from .models import users, save_users
-#from .face_recognition_utils import load_known_faces, recognize_faces, draw_labels
-
-UPLOAD_FOLDER = 'app/static/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+from .face_recognition_utils import load_known_faces, recognize_faces, draw_labels
 
 bp = Blueprint('auth', __name__)
 bp.config = {
-    'UPLOAD_FOLDER': UPLOAD_FOLDER
+    'UPLOAD_FOLDER': 'app/static/uploads'
 }
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
 
 @bp.route('/', methods=['GET'])
 def index():
@@ -79,3 +77,27 @@ def dashboard():
         return render_template('dashboard.html', username=session['user'], profile_picture=session['profile_picture'])
     return redirect(url_for('auth.index'))
 
+@bp.route('/camera', methods=['GET'])
+def camera():
+    return render_template('camera.html')
+
+def generate_frames():
+    camera = cv2.VideoCapture(0)
+    known_face_encodings, known_face_names = load_known_faces(users, bp.config['UPLOAD_FOLDER'])
+
+    while True:
+        success, frame = camera.read()
+        if not success:
+            break
+        else:
+            face_locations, face_names = recognize_faces(frame, known_face_encodings, known_face_names)
+            frame = draw_labels(frame, face_locations, face_names)
+
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@bp.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')

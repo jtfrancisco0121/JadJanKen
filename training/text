@@ -1,0 +1,24 @@
+@bp.route('/camera', methods=['GET'])
+def camera():
+    return render_template('camera.html')
+
+def generate_frames():
+    camera = cv2.VideoCapture(0)
+    known_face_encodings, known_face_names = load_known_faces(users, bp.config['UPLOAD_FOLDER'])
+
+    while True:
+        success, frame = camera.read()
+        if not success:
+            break
+        else:
+            face_locations, face_names = recognize_faces(frame, known_face_encodings, known_face_names)
+            frame = draw_labels(frame, face_locations, face_names)
+
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@bp.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')

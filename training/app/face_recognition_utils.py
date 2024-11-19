@@ -1,9 +1,4 @@
 # app/face_recognition_utils.py
-
-#pip install opencv-python
-#pip install face_recognition
-#pip install numpy
-
 import face_recognition
 import cv2
 import os
