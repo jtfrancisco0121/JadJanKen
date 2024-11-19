@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ username }}</h2>
+    <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profile Picture" style="width:150px;height:150px;">
+    <a href="{{ url_for('auth.logout') }}"><button>Logout</button></a>
+</body>
+</html>
