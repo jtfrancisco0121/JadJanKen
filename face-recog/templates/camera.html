@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    h1 {
+        text-align: center;
+    }
+    .container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100vh; /* Full viewport height */
+        flex-direction: column;
+    }
+    img {
+        width: 640px;
+        height: 480px;
+    }
+</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Live Camera Feed</title>
+</head>
+<body>
+    <h1>Live Camera Feed with Face Recognition</h1>
+    <div class="container">
+        <img src="{{ url_for('auth.video_feed') }}" alt="Live Camera Feed">
+    </div>
+</body>
+</html>
