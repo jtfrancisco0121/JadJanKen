@@ -8,8 +8,8 @@
     h2 {
         text-align: center;
         margin-top: 50px; /* Add some margin to the top */
-        font-family: 'Libre Baskerville', sans-serif;
-        font-size: 50pt;
+        font-family: 'Bahnschrift', sans-serif;
+        font-size: 30pt;
     }
     .container {
         display: flex;
@@ -21,24 +21,40 @@
         margin-top: 20px;
     } 
     .whole_div {
-        margin-top: 17%;
+        text-align: center;
+        margin-top: 14%;
     }
     button{
+        font-family: Tw Cen MT;
         width: 190px;
-        height: 80px;
-        font-size: 30pt;
+        height: 60px;
+        font-size: 21pt;
         margin-left: 40px;
+        font-weight: bold
+    }
+    .logo-cont p {
+        margin: 0;          /* Remove default margin */
+        padding: 0;         /* Remove default padding */
+        line-height: 1.5;     /* Adjust line height to reduce space between lines */
+        font-size: 30pt;
+        text-align: center;
+        font-weight: bold;
+        color:darkblue;
     }
 </style>
     <title>Home</title>
 </head>
 <body>
     <div class="whole_div">
-    <h2>Attendance Tracker with Facial Recognition</h2>
+        <div class="logo-cont">
+            <p>ATTENDANCE TRACKER</p>
+            <p>WITH FACIAL RECOGNITION</p>
+        </div>
+    
         <div class ="container">
-        <a href="{{ url_for('auth.register') }}"><button>Register</button></a>
-        <a href="{{ url_for('auth.login') }}"><button>Login</button></a>
-        <a href="{{ url_for('auth.camera') }}"><button>Camera</button></a>
+        <a href="{{ url_for('auth.register') }}"><button>REGISTER</button></a>
+        <a href="{{ url_for('auth.login') }}"><button>LOGIN</button></a>
+        <a href="{{ url_for('auth.camera') }}"><button>CAMERA</button></a>
         </div>
     </div>
 </body>
